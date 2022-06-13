@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define ProductName="Renga Plugin Installer"?>
+  <?define Manufacturer="RengaCloud"?>
+  <?define ProductLanguage = "1033" ?>
+  <?define ProductPath="..\Bin\$(var.Configuration)\"?>
+
+  <?define ProductVersion="1.0.0.0"?>
+  <?define ProductWXIPath="."?>
+
+  <?define ProtocolName = "renplginst" ?>
+</Include>

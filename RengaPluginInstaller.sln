@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RengaPluginInstaller", "RengaPluginInstaller\RengaPluginInstaller.csproj", "{20E8C8B1-ADED-46D2-97C2-B7FB05317394}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MSI", "Installer\MSI.wixproj", "{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "PluginInstallerInstall", "Bootstrapper\PluginInstallerInstall.wixproj", "{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B} = {CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Debug|x86.Build.0 = Debug|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Release|x86.ActiveCfg = Release|Any CPU
+		{20E8C8B1-ADED-46D2-97C2-B7FB05317394}.Release|x86.Build.0 = Release|Any CPU
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Debug|x86.ActiveCfg = Debug|x86
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Debug|x86.Build.0 = Debug|x86
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Release|Any CPU.ActiveCfg = Release|x86
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Release|x86.ActiveCfg = Release|x86
+		{CAD05E92-AAA4-48D4-AC0F-228EB6FAB37B}.Release|x86.Build.0 = Release|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Debug|x86.ActiveCfg = Debug|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Debug|x86.Build.0 = Debug|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Release|Any CPU.ActiveCfg = Release|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Release|x86.ActiveCfg = Release|x86
+		{E7B54030-7BF8-4F25-B06D-8A52AB8C4881}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

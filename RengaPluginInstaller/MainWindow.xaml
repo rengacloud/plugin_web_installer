@@ -1,0 +1,44 @@
+﻿<Window x:Class="RengaPluginInstaller.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RengaPluginInstaller"
+        mc:Ignorable="d"
+        Title="Установка" Height="280" Width="740"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="TitleText" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontFamily" Value="Nunito"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style> 
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Grid>
+        <Image x:Name="Logo" Height="80" Width="80" Margin="30,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="80" UriSource="pack://siteoforigin:,,,/logo.png" ></BitmapImage>
+            </Image.Source>
+        </Image>
+
+        <TextBlock Text="Установка плагина" Style="{StaticResource TitleText}" x:Name="titleMessage" Margin="50,15,10,10" FontSize="24" HorizontalAlignment="Center" Foreground="Red" VerticalAlignment="Top" />
+        <TextBox x:Name="mainMessage" 
+                   Margin="135,55,0,0"
+                   FontSize="14"
+                   Width="580"
+                   HorizontalAlignment="Center" 
+                   Foreground="Black" 
+                   VerticalAlignment="Top" 
+                   TextWrapping="Wrap" 
+                   AcceptsReturn="True"
+                   HorizontalScrollBarVisibility="Disabled"
+                   VerticalScrollBarVisibility="Auto"
+                   IsReadOnly="True"
+                   BorderThickness="0" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Content="Установить" x:Name="InstallButton"  Click="InstallButtonClick" Command="{Binding Path=InstallCommand}" Visibility="{Binding Path=InstallEnabled, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="11" Height="25" Width="90" FontSize="14"/>
+            <Button Content="Выйти" IsCancel="True" Click="CloseWindow" Command="{Binding Path=ExitCommand}" Margin="11" Height="25" Width="85" FontSize="14"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?include "..\InstallResources\vars.wxi" ?>
+<?include "..\InstallResources\Guids.wxi" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     >
+
+  <Bundle
+    Name="$(var.ProductName)"
+          Manufacturer="$(var.Manufacturer)"
+          Copyright="Copyright LLC $(var.Manufacturer), 2022. All rights reserved."
+          Version="$(var.ProductVersion)"
+          UpgradeCode="$(var.ProductSetup_GUID)"
+          DisableModify ="button"
+    >
+    <bal:Condition Message="#(loc.PlatformIsNotSupported)">(((VersionNT64 = v6.1) AND (ServicePackLevel &gt;= 1)) OR (VersionNT64 &gt;= v6.2))</bal:Condition>
+
+    <Variable Name="ProductName" Type="string" Value="$(var.ProductName)"/>
+    <Variable Name="InstallFolder" bal:Overridable="yes" Persisted="yes" Type="string" Value="[ProgramFiles6432Folder]$(var.ProductName)" />
+    <Variable Name="RengaInstallFolder" bal:Overridable="yes" Persisted="yes" Type="string" Value="[ProgramFiles6432Folder]Renga" />
+
+
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication
+            LicenseUrl=""
+            ThemeFile="..\InstallResources\Resource\Theme.thm"
+            LogoFile="..\InstallResources\Resource\install_logo.png"
+            LocalizationFile="..\InstallResources\Translations\en_en.wxl"
+            />
+
+      <!-- english -->
+      <Payload Name="1033\thm.wxl" SourceFile="..\InstallResources\Translations\en_en.wxl" />
+      <!-- russian -->
+      <Payload Name="1049\thm.wxl" SourceFile="..\InstallResources\Translations\ru_ru.wxl" />
+
+      <Payload Name="install_logo.png" SourceFile="..\InstallResources\Resource\install_logo.png" />
+    </BootstrapperApplicationRef>
+    <Chain>
+      <MsiPackage
+        Id="PluginInstallerInstall"
+        Cache="yes"
+        Compressed="yes"
+        SuppressSignatureVerification="yes"
+        Name="$(var.ProductName)"
+        SourceFile="..\Installer\bin\$(var.Configuration)\Installer.msi"
+        DisplayInternalUI="no"
+        Vital="yes"
+        Visible="no"
+        InstallCondition="VersionNT64"
+        >
+        <MsiProperty Name="INSTALL_DIRECTORY" Value="[InstallFolder]" />
+        <MsiProperty Name="RENGA_INSTALL_DIRECTORY" Value="[RengaInstallFolder]" />
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>

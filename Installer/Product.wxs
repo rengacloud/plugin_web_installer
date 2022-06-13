@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?include "..\InstallResources\vars.wxi" ?>
+<?include "..\InstallResources\Guids.wxi" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="$(var.ProductId)" Name="$(var.ProductName)" Language="1033" Manufacturer="RengaCloud" Version="$(var.ProductVersion)"
+          UpgradeCode="$(var.ProductSetup_GUID)">
+    <Package Platform = "x64" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of $(var.ProductName) is already installed." />
+    <MediaTemplate />
+
+    <!--<Property Id='RENGA_INSTALL_DIRECTORY'>
+      <RegistrySearch Id='FindRengaInstallDirectory' Root='HKLM'
+                      Key='Software\RengaCloud\$(var.ProductName)'
+                      Name='RengaInstallDirectory' Type='raw' />
+    </Property>-->
+
+    <DirectoryRef Id="TARGETDIR">
+      <Component Id="RegistryEntries" Guid="$(var.RegistryEntriesUUID)">
+        <RegistryKey Root="HKCU" Key="Software\RengaCloud\$(var.ProductName)">
+          <RegistryValue Type="string" Name="RengaInstallPath" Value="[RENGA_INSTALL_DIRECTORY]"/>
+        </RegistryKey>
+      </Component>
+    </DirectoryRef>
+    
+    
+    <Feature Id="ProductFeature" Title="Installer" Level="1">
+      <ComponentRef Id="RengaPluginInstaller.exe" />
+      <ComponentRef Id="logo.png" />
+	  <ComponentRef Id="Ookii.Dialogs.Wpf.dll" />
+      <ComponentRef Id="RegisterCustomProto" />
+      <ComponentRef Id="RegistryEntries" />
+    </Feature>
+
+    <!--<CustomActionRef Id='SaveCmdRengaInstallDirectory' />
+    <CustomActionRef Id='SetFromCmdRengaInstallDirectory' />-->
+
+    <DirectoryRef Id="TARGETDIR">
+      <Component Id="RegisterCustomProto" Guid="$(var.RegisterCustomProtoUUID)">
+        <RegistryKey Key="Software\Classes\$(var.ProtocolName)\shell\open\command" Root="HKCU">
+          <RegistryValue Value="&quot;[INSTALL_DIRECTORY]RengaPluginInstaller.exe&quot; &quot;%1&quot;" Type="string" />
+        </RegistryKey>
+        <RegistryKey Key="Software\Classes\$(var.ProtocolName)" Root="HKCU">
+          <RegistryValue Name="URL Protocol" Value="&quot;&quot;" Type="string" />
+          <RegistryValue Value="&quot;URL:$(var.ProtocolName) Protocol&quot;" Type="string" />
+        </RegistryKey>
+        <RegistryKey ForceCreateOnInstall="yes" Key="Software\Classes\$(var.ProtocolName)\shell" Root="HKCU" />
+        <RegistryKey Key="Software\Classes\$(var.ProtocolName)\DefaultIcon" Root="HKCU">
+          <RegistryValue Value="&quot;RengaPluginInstaller.exe,1&quot;" Type="string" />
+        </RegistryKey>
+        <RegistryKey ForceCreateOnInstall="yes" Key="Software\Classes\$(var.ProtocolName)\shell\open" Root="HKCU" />
+      </Component>
+    </DirectoryRef>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder" Name="ProgramFiles64Folder">
+        <Directory Id="INSTALL_DIRECTORY" Name="$(var.ProductName)">
+          <Component Win64="yes" Id="RengaPluginInstaller.exe" Guid="$(var.Handler_GUID)">
+            <File Id="RengaPluginInstaller.exe" Name="RengaPluginInstaller.exe" Source="$(var.ProductPath)RengaPluginInstaller.exe" />
+          </Component>
+          <Component Win64="yes" Id="logo.png" Guid="$(var.LOGO_GUID)">
+            <File Id="logo.png" Name="logo.png" Source="..\InstallResources\Resource\logo.png" />
+          </Component>
+		  <Component Win64="yes" Id="Ookii.Dialogs.Wpf.dll" Guid="$(var.Ookii_GUID)">
+			<File Id="Ookii.Dialogs.Wpf.dll" Name="Ookii.Dialogs.Wpf.dll" Source="$(var.ProductPath)Ookii.Dialogs.Wpf.dll" />
+		  </Component>			
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <!--<Fragment>
+    <CustomAction Id='SaveCmdRengaInstallDirectory' Property='CMD_RENGA_INSTALL_DIRECTORY'
+                  Value='[RENGA_INSTALL_DIRECTORY]' Execute='firstSequence' />
+    <CustomAction Id='SetFromCmdRengaInstallDirectory' Property='RENGA_INSTALL_DIRECTORY'
+                  Value='[CMD_RENGA_INSTALL_DIRECTORY]' Execute='firstSequence' />
+
+    <InstallUISequence>
+      <Custom Action='SaveCmdRengaInstallDirectory' Before='AppSearch' />
+      <Custom Action='SetFromCmdRengaInstallDirectory' After='AppSearch'>
+        CMD_RENGA_INSTALL_DIRECTORY
+      </Custom>
+    </InstallUISequence>
+
+    <InstallExecuteSequence>
+      <Custom Action='SaveCmdRengaInstallDirectory' Before='AppSearch' />
+      <Custom Action='SetFromCmdRengaInstallDirectory' After='AppSearch'>
+        CMD_RENGA_INSTALL_DIRECTORY
+      </Custom>
+    </InstallExecuteSequence>
+  </Fragment>-->
+</Wix>

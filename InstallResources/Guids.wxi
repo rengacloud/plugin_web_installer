@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?define ProductId = "{74E8F9CC-3A91-4C00-AAB0-0F88291723AB}" ?>
+  <?define UpgradeCode = "{43E1581A-70A9-4622-B316-248164DFCAEB}"?>
+  <?define ProductSetup_GUID = "{DF02B718-B462-4680-B5D4-5251AA291A89}" ?>
+  
+  <?define Handler_GUID = "{91EA6B79-A042-42D9-BDEF-67D86C45B43C}" ?>
+  <?define LOGO_GUID = "{4E80C8A2-43FD-4707-8E41-618CF9598826}" ?>
+  <?define Ookii_GUID = "{63BC9FFA-2116-4D1D-87E6-FDC18078701F}" ?>
+
+  <?define RegistryEntriesUUID = "{3C3E832C-640B-4B7D-9EB2-2F585EA5FCEC}" ?>
+  <?define RegisterCustomProtoUUID = "{A3F4E01A-3E1B-4828-82BF-78E797223051}" ?>
+
+</Include>
